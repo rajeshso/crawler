@@ -1,6 +1,17 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:6.1.0'
+    }
+}
 plugins {
     id 'java'
 }
+apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: 'application'
+mainClassName = 'com.wd.crawler.Main'
 
 group 'wiproDigitalInterview'
 version '1.0-SNAPSHOT'
@@ -24,8 +35,15 @@ dependencies {
 
 
     testImplementation group: 'org.assertj', name: 'assertj-core', version: '3.19.0'
+
 }
 
 test {
     useJUnitPlatform()
+}
+
+shadowJar {
+    manifest {
+        attributes 'Main-Class': mainClassName
+    }
 }
