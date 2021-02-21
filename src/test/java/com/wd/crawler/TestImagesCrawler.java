@@ -1,13 +1,12 @@
 package com.wd.crawler;
 
 
-
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Set;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.jupiter.api.Test;
@@ -18,15 +17,20 @@ public class TestImagesCrawler {
 
     @Test
     public void givenAPageWithAnImageWhenCrawledShouldFind1Image() throws Exception {
-        assertThat(true).isTrue();
-        String page = Files.readString(Paths.get("/pageWithImage.html"));
-        assertNotNull(page);
-
+        Path path = Paths.get("src/test/resources/pageWithSingleImage.html");
+        String page = Files.readString(path, ISO_8859_1);
+        assertThat(page).isNotNull();
         Document document = Jsoup.parse(page);
+        assertThat(imagesCrawler.getImagesOnPage(document)).hasSize(1);
+    }
 
-        Set<String> imagesOnPage = imagesCrawler.getImagesOnPage(document);
-
-        assertThat(imagesOnPage).hasSize(1);
+    @Test
+    public void givenAPageWithAnImageWhenCrawledShouldFind3Image() throws Exception {
+        Path path = Paths.get("src/test/resources/pageWithMultipleImages.html");
+        String page = Files.readString(path, ISO_8859_1);
+        assertThat(page).isNotNull();
+        Document document = Jsoup.parse(page);
+        assertThat(imagesCrawler.getImagesOnPage(document)).hasSize(4);
     }
 
 
