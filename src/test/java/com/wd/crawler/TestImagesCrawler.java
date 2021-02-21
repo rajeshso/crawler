@@ -11,26 +11,26 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.jupiter.api.Test;
 
-public class TestImagesCrawler {
+class TestImagesCrawler {
 
     private ImagesCrawler imagesCrawler = new ImagesCrawler();
 
     @Test
-    public void givenAPageWithAnImageWhenCrawledShouldFind1Image() throws Exception {
+    void givenAPageWithAnImageWhenCrawledShouldFind1Image() throws Exception {
         Path path = Paths.get("src/test/resources/pageWithSingleImage.html");
         String page = Files.readString(path, ISO_8859_1);
         assertThat(page).isNotNull();
         Document document = Jsoup.parse(page);
-        assertThat(imagesCrawler.getImagesOnPage(document)).hasSize(1);
+        assertThat(imagesCrawler.getImages(document)).hasSize(1);
     }
 
     @Test
-    public void givenAPageWithAnImageWhenCrawledShouldFind3Image() throws Exception {
+    void givenAPageWithAnImageWhenCrawledShouldFind3Image() throws Exception {
         Path path = Paths.get("src/test/resources/pageWithMultipleImages.html");
         String page = Files.readString(path, ISO_8859_1);
         assertThat(page).isNotNull();
         Document document = Jsoup.parse(page);
-        assertThat(imagesCrawler.getImagesOnPage(document)).hasSize(4);
+        assertThat(imagesCrawler.getImages(document)).hasSize(4);
     }
 
 

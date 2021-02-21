@@ -12,14 +12,14 @@ import org.jsoup.select.Elements;
 public class ImagesCrawler {
 
   private static final String REGEX_FOR_IMAGES = "(http.*?(jpg|png|gif|bmp|img|jpeg|ico))";
-  public static final String A_STYLE_PATTERN = "a[style]";
-  public static final String DIV_STYLE_PATTERN = "div[style]";
-  public static final String IMAGE_SRC_PATTERN = "img[src~=(?i)\\.(png|jpe?g|gif)]";
-  public static final String STYLE_PATTERN = "style";
-  public static final String SRC_PATTERN = "src";
+  private static final String A_STYLE_PATTERN = "a[style]";
+  private static final String DIV_STYLE_PATTERN = "div[style]";
+  private static final String IMAGE_SRC_PATTERN = "img[src~=(?i)\\.(png|jpe?g|gif)]";
+  private static final String STYLE_PATTERN = "style";
+  private static final String SRC_PATTERN = "src";
   private static final String EMPTY_STRING = "";
 
-  public Set<String> getImagesOnPage(Document document){
+  public Set<String> getImages(Document document){
     Set<String> imagesOfDocument = new HashSet<>();
     Elements images = document.select(A_STYLE_PATTERN);
     Elements divs = document.select(DIV_STYLE_PATTERN);
