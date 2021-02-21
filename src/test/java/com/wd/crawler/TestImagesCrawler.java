@@ -13,7 +13,8 @@ import org.junit.jupiter.api.Test;
 
 class TestImagesCrawler {
 
-    private ImagesCrawler imagesCrawler = new ImagesCrawler();
+
+    private ImageCrawler imagesCrawler = new ImageCrawler();
 
     @Test
     void givenAPageWithAnImageWhenCrawledShouldFind1Image() throws Exception {
@@ -32,6 +33,7 @@ class TestImagesCrawler {
         Document document = Jsoup.parse(page);
         assertThat(imagesCrawler.getImages(document)).hasSize(4);
     }
+
 
 
 }
