@@ -18,6 +18,7 @@ public class TestImagesCrawler {
 
     @Test
     public void givenAPageWithAnImageWhenCrawledShouldFind1Image() throws Exception {
+        assertThat(true).isTrue();
         String page = Files.readString(Paths.get("/pageWithImage.html"));
         assertNotNull(page);
 
